@@ -37,9 +37,4 @@ node4 = Node(2, node3)
 node5 = Node(6, node4)
 ll = LinkedList(node5)
 
-print("Original list: " + str(ll))
-
-ll.buffless_dedupe()
-
-print("Deduped list: " + str(ll))
-
+print(str(ll.revIndex(2).val))

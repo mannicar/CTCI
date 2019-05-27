@@ -58,5 +58,22 @@ class LinkedList:
                 pointerNode = pointerNode.child
             candidateNode = candidateNode.child
 
+    def getNode(self, index):
+        currNode = self.root
+        if index == 0:
+            return currNode
+        else:
+            return self.getNode(index - 1)
 
-
+    def revIndex(self, index):
+        #get length
+        listLen = 1
+        currNode = self.root
+        while currNode.child is not None:
+            listLen += 1
+            currNode = currNode.child
+        #get forward index
+        newIndex = listLen - index
+        print ("List is " + str(self))
+        print ("List of length: " + str(listLen) + " wants the " + str(index) + "th element from the end, i.e., " + str(newIndex) + "th element.")
+        return self.getNode(newIndex)
