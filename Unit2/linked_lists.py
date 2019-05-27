@@ -45,11 +45,18 @@ class LinkedList:
             currNode = currNode.child
         if currNode.val in buff.keys():
             currNode.delete()
-    #
-    # def buffless_dedupe(self):
-    #     candidateNode = self.root
-    #     pointerNode = self.root.child
-    #     while candidateNode.child is not None:
-    #
+
+    def buffless_dedupe(self):
+        candidateNode = self.root
+        pointerNode = self.root.child
+        while candidateNode.child is not None:
+            while pointerNode is not None:
+                if candidateNode.val == pointerNode.val:
+                    newNode = pointerNode.child
+                    self.delete(pointerNode)
+                    pointerNode = candidateNode
+                pointerNode = pointerNode.child
+            candidateNode = candidateNode.child
+
 
 
