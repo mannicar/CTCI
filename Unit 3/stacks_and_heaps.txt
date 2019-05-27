@@ -1,0 +1,7 @@
+class nStack:
+
+    def __init__(self, n, totalSize):
+        
+        self.arr = []
+        for i in range(totalSize):
+        
