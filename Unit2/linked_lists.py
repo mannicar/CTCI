@@ -123,7 +123,7 @@ class LinkedList:
     def __int__(self):
         res = 0
         if self.root is None:
-            return
+            return 0
         currNode = self.root
         factor = 1
         while currNode is not None:
@@ -131,4 +131,8 @@ class LinkedList:
             currNode = currNode.child
             factor *= 10
         return res
+
+    def sum_list(self, other):
+        return self.int() + other.int()
+
 
