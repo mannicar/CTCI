@@ -118,3 +118,17 @@ class LinkedList:
             moreList.append(currNode.val)
         lessList.add(moreList)
         self.root = lessList.root
+
+    # 2.5
+    def __int__(self):
+        res = 0
+        if self.root is None:
+            return
+        currNode = self.root
+        factor = 1
+        while currNode is not None:
+            res += currNode.val * factor
+            currNode = currNode.child
+            factor *= 10
+        return res
+
