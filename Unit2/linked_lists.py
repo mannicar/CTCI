@@ -4,6 +4,7 @@ class Node:
         self.val = val
         self.child = child
 
+    # 2.3
     def delete(self):
         if self.child is not None:
             self.val = self.child.val
@@ -44,6 +45,7 @@ class LinkedList:
         res += "]"
         return res
 
+    # 2.1a
     def dedupe(self):
         buff = {}
         currNode = self.root
@@ -56,6 +58,7 @@ class LinkedList:
         if currNode.val in buff.keys():
             currNode.delete()
 
+    # 2.1b
     def buffless_dedupe(self):
         candidateNode = self.root
         pointerNode = self.root.child
@@ -75,6 +78,7 @@ class LinkedList:
         else:
             return self.getNode(index - 1)
 
+    # 2.2
     def revIndex(self, index):
         #get length
         listLen = 1
