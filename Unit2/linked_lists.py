@@ -4,7 +4,7 @@ class Node:
         self.val = val
         self.child = child
 
-    def nodeDelete(self):
+    def delete(self):
         if self.child is not None:
             self.val = self.child.val
             if self.child.child is not None:
@@ -54,7 +54,7 @@ class LinkedList:
                 self.delete(currNode)
             currNode = currNode.child
         if currNode.val in buff.keys():
-            currNode.nodeDelete()
+            currNode.delete()
 
     def buffless_dedupe(self):
         candidateNode = self.root
