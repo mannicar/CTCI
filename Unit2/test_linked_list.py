@@ -57,4 +57,27 @@ class TestLinkedLists(unittest.TestCase):
         print(integer)
         print(strint)
 
+    def test_node_reverse(self):
+        node1 = Node(5)
+        node2 = Node(6, node1)
+        node3 = Node(3, node2)
+        node4 = Node(2, node3)
+        node5 = Node(6, node4)
+        node6 = Node(10, node5)
 
+        revnode = node6.reverse()
+        ll = LinkedList(revnode)
+        print(ll)
+
+
+node1 = Node(5)
+node2 = Node(6, node1)
+node3 = Node(3, node2)
+node4 = Node(2, node3)
+node5 = Node(6, node4)
+node6 = Node(10, node5)
+
+ll = LinkedList(node6)
+print(ll)
+revlist = ll.reverse()
+print(ll)

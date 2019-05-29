@@ -4,6 +4,14 @@ class Node:
         self.val = val
         self.child = child
 
+    def __str__(self):
+        res = ""
+        currNode = self
+        while currNode is not None:
+            res += str(currNode.val) + "->"
+            currNode = currNode.child
+        return res
+
     # 2.3
     def delete(self):
         if self.child is not None:
@@ -26,6 +34,14 @@ class LinkedList:
             return currNode
         else:
             return self.getNode(index - 1)
+
+    def get_length(self):
+        res = 0
+        currNode = self.root
+        while currNode is not None:
+            res += 1
+            currNode = currNode.child
+        return res
 
     def add(self, other):
         if self.root is None and other.root is None:
@@ -50,11 +66,29 @@ class LinkedList:
                 currNode = currNode.child
             currNode.child = Node(val, None)
 
+    def prepend(self, val):
+        if self.root is None:
+            self.root = Node(val, None)
+        else:
+            self.root = Node(val, self.root)
+
     def delete(self, node):
         if self.root == node:
             self.root = self.root.child
         else:
             node.delete()
+
+    def reverse(self):
+        if self.root is None:
+            return
+        else:
+            res = LinkedList(Node(self.root.val, None))
+            currNode = self.root
+            while currNode.child is not None:
+                currNode = currNode.child
+                res.prepend(currNode.val)
+            self.root = res.root
+
 
     def __str__(self):
         curr = self.root
@@ -134,5 +168,16 @@ class LinkedList:
 
     def sum_list(self, other):
         return self.int() + other.int()
+
+    # 2.6
+    def is_palindrome(self):
+        l = self.get_length()
+        currList = LinkedList(self.root)
+        revList = self.reverse()
+        for i in range(l):
+            if currList.getNode(i).val != revList.getNode(i).val:
+                return False
+        return True
+
 
 
