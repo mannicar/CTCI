@@ -20,21 +20,41 @@ class LinkedList:
     def __init__(self, root):
         self.root = root
 
-    def delete(self, node):
+    def getNode(self, index):
         currNode = self.root
-        if currNode == node:
-            self.root = currNode.child
+        if index == 0:
+            return currNode
+        else:
+            return self.getNode(index - 1)
+
+    def add(self, other):
+        if self.root is None and other.root is None:
             return
-        while currNode.child is not None:
-            if currNode.child == node and currNode.child.child is not None:
-                currNode.child = currNode.child.child
-                return
-            elif currNode.child == node and currNode.child.child is None:
-                currNode.child = None
-                return
-            currNode = currNode.child
-        if currNode == node:
-            currNode = None
+        elif self.root is None:
+            self.root = other.root
+            return
+        elif other.root is None:
+            return
+        else:
+            currNode = self.root
+            while currNode.child is not None:
+                currNode = currNode.child
+            currNode.child = other.root
+
+    def append(self, val):
+        if self.root is None:
+            self.root = Node(val, None)
+        else:
+            currNode = self.root
+            while currNode.child is not None:
+                currNode = currNode.child
+            currNode.child = Node(val, None)
+
+    def delete(self, node):
+        if self.root == node:
+            self.root = self.root.child
+        else:
+            node.delete()
 
     def __str__(self):
         curr = self.root
@@ -56,7 +76,7 @@ class LinkedList:
                 self.delete(currNode)
             currNode = currNode.child
         if currNode.val in buff.keys():
-            currNode.delete()
+            self.delete(currNode)
 
     # 2.1b
     def buffless_dedupe(self):
@@ -65,29 +85,36 @@ class LinkedList:
         while candidateNode.child is not None:
             while pointerNode is not None:
                 if candidateNode.val == pointerNode.val:
-                    newNode = pointerNode.child
                     self.delete(pointerNode)
                     pointerNode = candidateNode
                 pointerNode = pointerNode.child
             candidateNode = candidateNode.child
 
-    def getNode(self, index):
-        currNode = self.root
-        if index == 0:
-            return currNode
-        else:
-            return self.getNode(index - 1)
 
     # 2.2
     def revIndex(self, index):
-        #get length
         listLen = 1
         currNode = self.root
         while currNode.child is not None:
             listLen += 1
             currNode = currNode.child
-        #get forward index
         newIndex = listLen - index
-        print ("List is " + str(self))
-        print ("List of length: " + str(listLen) + " wants the " + str(index) + "th element from the end, i.e., " + str(newIndex) + "th element.")
         return self.getNode(newIndex)
+
+    # 2.4
+    def pivot(self, val):
+        currNode = self.root
+        lessList = LinkedList(None)
+        moreList = LinkedList(None)
+        while currNode.child is not None:
+            if currNode.val < val:
+                lessList.append(currNode.val)
+            else:
+                moreList.append(currNode.val)
+            currNode = currNode.child
+        if currNode.val < val:
+            lessList.append(currNode.val)
+        else:
+            moreList.append(currNode.val)
+        lessList.add(moreList)
+        self.root = lessList.root

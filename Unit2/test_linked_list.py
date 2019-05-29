@@ -35,11 +35,12 @@ node2 = Node(6, node1)
 node3 = Node(3, node2)
 node4 = Node(2, node3)
 node5 = Node(6, node4)
-ll = LinkedList(node5)
+node6 = Node(10, node5)
+ll = LinkedList(node6)
 
 #print(str(ll.revIndex(2).val))
 print("Original list: " + str(ll))
 
-ll.dedupe()
+ll.pivot(6)
 
-print("Deduped list: " + str(ll))
+print("Pivoted list: " + str(ll))
